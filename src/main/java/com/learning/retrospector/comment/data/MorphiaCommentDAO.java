@@ -5,6 +5,7 @@ import java.util.List;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.dao.BasicDAO;
+import org.mongodb.morphia.query.Query;
 
 import com.learning.retrospector.comment.api.Comment;
 import com.learning.retrospector.comment.api.CommentException;
@@ -35,8 +36,12 @@ public class MorphiaCommentDAO extends BasicDAO<Comment, String> implements Comm
 
 	@Override
 	public Comment getCommentById(String commentId) throws CommentNotFoundException, CommentException {
-		// TODO Auto-generated method stub
-		return null;
+		Query<Comment> query = createQuery().field("commentId").equal(commentId);
+		Comment comment = query.get();
+		if(comment == null)
+			throw new CommentNotFoundException();
+		
+		return comment;
 	}
 
 	@Override

@@ -36,8 +36,7 @@ public class RetroComment implements CommentInterface{
 
 	@Override
 	public Comment getCommentById(String commentId) throws CommentNotFoundException, CommentException {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getCommentById(commentId);
 	}
 
 	@Override
