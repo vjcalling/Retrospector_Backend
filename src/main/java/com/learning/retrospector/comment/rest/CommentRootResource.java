@@ -1,11 +1,11 @@
 package com.learning.retrospector.comment.rest;
 
 import java.net.URISyntaxException;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -56,5 +56,16 @@ public class CommentRootResource {
 			e.printStackTrace();
 		}
 		return Response.ok().entity(comment).build();
+	}
+	
+	@PUT
+    @Path("/{id}")
+	public Response updateComment(Comment updatedComment) {
+		try {
+			commentObj.updateComment(updatedComment);
+		} catch (CommentNotFoundException | CommentException e) {
+			e.printStackTrace();
+		}
+		return Response.ok().entity(updatedComment).build();
 	}
 }

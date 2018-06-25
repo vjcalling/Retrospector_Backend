@@ -65,9 +65,10 @@ public class MorphiaCommentDAO extends BasicDAO<Comment, String> implements Comm
 	}
 
 	@Override
-	public void updateComment(Comment comment)
-			throws InvalidCommentException, DuplicateCommentException, CommentException {
-		// TODO Auto-generated method stub
+	public void updateComment(Comment comment) throws CommentNotFoundException, CommentException {
+		Key<Comment> key = save(comment);
+		if(key == null)
+			throw new CommentNotFoundException();
 		
 	}
 

@@ -21,7 +21,7 @@ public interface CommentDAO {
 	public List<Comment> getCommentsByScrumForSprint(String scrum, int sprintNumber) throws CommentNotFoundException, CommentException;
 
 	//Update
-	public void updateComment(Comment comment) throws InvalidCommentException, DuplicateCommentException, CommentException;
+	public void updateComment(Comment comment) throws CommentNotFoundException, CommentException;
 
 	//Delete
 	public void deleteComment(Comment comment) throws InvalidCommentException, DuplicateCommentException, CommentException;
