@@ -12,6 +12,7 @@ import com.learning.retrospector.comment.api.CommentException;
 import com.learning.retrospector.comment.api.CommentNotFoundException;
 import com.learning.retrospector.comment.api.DuplicateCommentException;
 import com.learning.retrospector.comment.api.InvalidCommentException;
+import com.mongodb.WriteResult;
 
 public class MorphiaCommentDAO extends BasicDAO<Comment, String> implements CommentDAO  {
 
@@ -72,17 +73,28 @@ public class MorphiaCommentDAO extends BasicDAO<Comment, String> implements Comm
 		
 	}
 
+	
+	
 	@Override
-	public void deleteComment(Comment comment)
-			throws InvalidCommentException, DuplicateCommentException, CommentException {
-		// TODO Auto-generated method stub
+	public void deleteComment(Comment comment) throws CommentNotFoundException, CommentException {
+		WriteResult result = delete(comment);
+		if(result == null)
+			throw new CommentNotFoundException();
 		
 	}
 
 	@Override
-	public void deleteCommentById(String id)
-			throws InvalidCommentException, DuplicateCommentException, CommentException {
-		// TODO Auto-generated method stub
+	public void deleteCommentById(String id) throws CommentNotFoundException, CommentException {
+		
+		System.out.println("DELETING COMMENT WITH ID: " + id);
+		Query<Comment> query = createQuery().field("commentId").equal(id);
+		Comment comment = query.get();
+		System.out.println("Comment found: " + comment.getCommentId());
+		
+		if(comment == null)
+			throw new CommentNotFoundException();
+		
+		delete(comment);
 		
 	}
 

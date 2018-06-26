@@ -3,6 +3,7 @@ package com.learning.retrospector.comment.rest;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -68,4 +69,16 @@ public class CommentRootResource {
 		}
 		return Response.ok().entity(updatedComment).build();
 	}
+	
+	@DELETE
+    @Path("/{id}")
+	public Response deleteCommentById(@PathParam("id") String commentId) {
+		try {
+			commentObj.deleteCommentById(commentId);
+		} catch (CommentNotFoundException | CommentException e) {
+			e.printStackTrace();
+		}
+		return Response.ok().entity(commentId).build();
+	}
+	
 }

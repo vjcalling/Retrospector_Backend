@@ -67,15 +67,14 @@ public class RetroComment implements CommentInterface{
 
 	@Override
 	public void deleteComment(Comment comment)
-			throws InvalidCommentException, DuplicateCommentException, CommentException {
-		// TODO Auto-generated method stub
+			throws CommentNotFoundException, CommentException {
+		dao.deleteComment(comment);
 		
 	}
 
 	@Override
-	public void deleteCommentById(String id)
-			throws InvalidCommentException, DuplicateCommentException, CommentException {
-		// TODO Auto-generated method stub
+	public void deleteCommentById(String id) throws CommentNotFoundException, CommentException {
+		 dao.deleteCommentById(id);
 		
 	}
 

@@ -24,7 +24,7 @@ public interface CommentDAO {
 	public void updateComment(Comment comment) throws CommentNotFoundException, CommentException;
 
 	//Delete
-	public void deleteComment(Comment comment) throws InvalidCommentException, DuplicateCommentException, CommentException;
-	public void deleteCommentById(String id) throws InvalidCommentException, DuplicateCommentException, CommentException;
+	public void deleteComment(Comment comment) throws CommentNotFoundException, CommentException;
+	public void deleteCommentById(String id) throws CommentNotFoundException, CommentException;
 
 }
