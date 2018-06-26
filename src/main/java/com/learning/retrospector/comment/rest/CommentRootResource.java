@@ -12,8 +12,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.learning.retrospector.comment.api.Comment;
+import com.learning.retrospector.comment.api.CommentConstants;
 import com.learning.retrospector.comment.api.CommentException;
 import com.learning.retrospector.comment.api.CommentInterface;
 import com.learning.retrospector.comment.api.CommentNotFoundException;
@@ -60,12 +62,12 @@ public class CommentRootResource {
 	}
 	
 	@PUT
-    @Path("/{id}")
 	public Response updateComment(Comment updatedComment) {
 		try {
 			commentObj.updateComment(updatedComment);
 		} catch (CommentNotFoundException | CommentException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			return Response.status(Status.NOT_FOUND).entity(CommentConstants.CommentError.COMMENT_NOT_FOUND.toString()).build();
 		}
 		return Response.ok().entity(updatedComment).build();
 	}
@@ -76,7 +78,8 @@ public class CommentRootResource {
 		try {
 			commentObj.deleteCommentById(commentId);
 		} catch (CommentNotFoundException | CommentException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			return Response.status(Status.NOT_FOUND).entity(CommentConstants.CommentError.COMMENT_NOT_FOUND.toString()).build();
 		}
 		return Response.ok().entity(commentId).build();
 	}

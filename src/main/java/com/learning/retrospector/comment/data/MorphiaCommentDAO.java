@@ -89,10 +89,11 @@ public class MorphiaCommentDAO extends BasicDAO<Comment, String> implements Comm
 		System.out.println("DELETING COMMENT WITH ID: " + id);
 		Query<Comment> query = createQuery().field("commentId").equal(id);
 		Comment comment = query.get();
-		System.out.println("Comment found: " + comment.getCommentId());
 		
 		if(comment == null)
 			throw new CommentNotFoundException();
+		
+		System.out.println("Comment found: " + comment.getCommentId());
 		
 		delete(comment);
 		
