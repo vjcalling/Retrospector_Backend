@@ -38,7 +38,7 @@ public class CommentRootResource {
 		return Response.ok().entity(comment).build();
 	}
 	
-	@Secured
+	//@Secured
 	@GET
     @Path("/")
 	@Produces("application/json")
